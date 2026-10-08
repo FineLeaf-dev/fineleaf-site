@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FineLeaf — AI 에이전트로 소프트웨어와 지식 작업을 자동화합니다</title>
+<meta name="description" content="FineLeaf(파인리프)는 AI 에이전트로 소프트웨어 개발과 지식 작업을 자동화하는 도구를 만드는 1인 IT 회사입니다.">
+<link rel="icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap">
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css');
+
+:root {
+  --bg: #F9F5F0;
+  --surface: #FFFFFF;
+  --text: #2B3824;
+  --muted: #5F6650;
+  --line: #E4DED3;
+  --accent: #8E8F69;
+  --leaf-dark: #2B3824;
+  --leaf-sage: #8E8F69;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1B2018;
+    --surface: #242B20;
+    --text: #E9EBDD;
+    --muted: #B4B8A0;
+    --line: #353D2F;
+    --accent: #A9AC85;
+    --leaf-dark: #E9EBDD;
+    --leaf-sage: #A9AC85;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  word-break: keep-all;
+}
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+header { padding: 56px 0 8px; }
+.lockup { display: flex; align-items: center; gap: 14px; }
+.lockup svg { width: 40px; height: 54px; flex: none; }
+.wordmark {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+.wordmark small {
+  display: block;
+  margin-top: 7px;
+  font-family: 'Pretendard Variable', Pretendard, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  color: var(--muted);
+}
+
+.hero { padding: 56px 0 48px; }
+.hero h1 {
+  margin: 0 0 20px;
+  font-size: clamp(30px, 6vw, 42px);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.hero p { margin: 0 0 12px; color: var(--muted); max-width: 60ch; }
+.hero p.en { font-size: 15px; }
+
+section { padding: 40px 0; border-top: 1px solid var(--line); }
+h2 {
+  margin: 0 0 24px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.products { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+.products li {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px 24px;
+}
+.products h3 { margin: 0 0 4px; font-size: 21px; font-weight: 700; letter-spacing: -0.01em; }
+.products .kind { margin: 0 0 10px; font-size: 14px; color: var(--accent); font-weight: 600; }
+.products p { margin: 0; color: var(--muted); font-size: 16px; }
+
+.prose p { margin: 0 0 14px; color: var(--muted); max-width: 62ch; }
+.prose p:last-child { margin-bottom: 0; }
+
+.contact a {
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 5px;
+}
+.contact p { margin: 10px 0 0; color: var(--muted); font-size: 15px; }
+
+footer { padding: 32px 0 56px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="lockup">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="215 132 606 816" role="img" aria-label="FineLeaf 심볼">
+        <path fill="var(--leaf-sage)" d="M253 914 C300 860 393 795 482 735 C562 665 592 582 643 522 C680 488 716 464 745 447 C757 485 752 535 744 565 C728 625 700 695 648 762 C590 818 487 862 398 888 C342 903 292 912 253 914 Z"/>
+        <path fill="var(--leaf-dark)" d="M253 845 C249 760 250 655 257 585 C272 480 320 395 452 306 C562 248 695 218 783 166 C786 258 752 360 600 442 C495 492 385 548 312 645 C278 725 260 795 253 845 Z"/>
+      </svg>
+      <div class="wordmark">FineLeaf<small>파인리프</small></div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h1>AI 에이전트로 소프트웨어 개발과 지식 작업을 자동화합니다</h1>
+      <p>FineLeaf(파인리프)는 한국의 1인 IT 회사입니다. 사람이 단계마다 확인하고 승인하는 방식으로, AI 에이전트가 실제 업무를 끝까지 처리하는 도구를 만듭니다.</p>
+      <p class="en" lang="en">FineLeaf is a one-person software studio in Korea. We build tools where AI agents carry software and knowledge work through to completion, with a human approving each step.</p>
+    </div>
+
+    <section>
+      <h2>Products</h2>
+      <ul class="products">
+        <li>
+          <h3>Leafier</h3>
+          <p class="kind">자연어로 요청하면 소프트웨어를 만들어 주는 서비스</p>
+          <p>요청을 문서로 정리하고, 그 문서에서 프로젝트 뼈대를 만들고, 기능을 하나씩 구현합니다. 각 단계의 결과는 사람이 검토한 뒤에 다음 단계로 넘어갑니다.</p>
+        </li>
+        <li>
+          <h3>Leafroot</h3>
+          <p class="kind">지식 관리 시스템</p>
+          <p>글과 영상, 메모를 한 가지 주장만 담은 노트로 정리하고 노트끼리 연결합니다. 쌓인 지식은 에이전트가 일할 때 참고 자료로 쓰입니다.</p>
+        </li>
+        <li>
+          <h3>LeafFire</h3>
+          <p class="kind">한국형 FIRE 플래너 미니앱</p>
+          <p>절세 계좌와 배당을 기준으로 은퇴 시점과 필요한 자산을 계산해 주는 재테크 계산 도구입니다.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="prose">
+      <h2>How we build</h2>
+      <p>FineLeaf의 제품은 Claude Code로 개발합니다. 설계와 구현, 검토를 AI 에이전트와 함께 진행하고, 결정과 승인은 사람이 맡습니다.</p>
+      <p>에이전트가 만든 결과물은 제안으로 다룹니다. 사람이 확인하기 전에는 다음 단계로 넘어가지 않는다는 원칙을 제품에도 그대로 넣었습니다.</p>
+    </section>
+
+    <section class="contact">
+      <h2>Contact</h2>
+      <a href="mailto:crowggang@fineleaf.co.kr">crowggang@fineleaf.co.kr</a>
+      <p>홍기용 · FineLeaf 대표</p>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 FineLeaf
+  </footer>
+
+</div>
+</body>
+</html>
