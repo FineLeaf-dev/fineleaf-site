@@ -116,15 +116,12 @@ h2 {
 .prose p { margin: 0 0 14px; color: var(--muted); max-width: 62ch; }
 .prose p:last-child { margin-bottom: 0; }
 
-.contact a {
-  color: var(--text);
-  font-size: 20px;
-  font-weight: 600;
-  text-decoration: underline;
-  text-decoration-color: var(--accent);
-  text-underline-offset: 5px;
-}
-.contact p { margin: 10px 0 0; color: var(--muted); font-size: 15px; }
+.contact .who { margin: 0 0 14px; font-size: 18px; font-weight: 600; color: var(--text); }
+.contact dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 20px; margin: 0; font-size: 16px; }
+.contact dt { color: var(--muted); }
+.contact dd { margin: 0; }
+.contact a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); }
+.contact a:hover { border-bottom-color: var(--accent); }
 
 footer { padding: 32px 0 56px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
 footer p { margin: 0 0 6px; }
@@ -286,10 +283,13 @@ main > section:first-child { border-top: 0; }
 
     <section class="contact">
       <h2>Contact</h2>
-      <a href="mailto:crowggang@fineleaf.co.kr">crowggang@fineleaf.co.kr</a><br>
-      <a href="tel:+821081199532"><span lang="ko">010-8119-9532</span><span lang="en">+82 10-8119-9532</span></a>
-      <p lang="ko">홍기용</p>
-      <p lang="en">Hong Kiyong</p>
+      <p class="who"><span lang="ko">파인리프 대표 홍기용</span><span lang="en">Hong Kiyong, CEO of FineLeaf</span></p>
+      <dl>
+        <dt><span lang="ko">이메일</span><span lang="en">Email</span></dt>
+        <dd><a href="mailto:crowggang@fineleaf.co.kr">crowggang@fineleaf.co.kr</a></dd>
+        <dt><span lang="ko">전화</span><span lang="en">Phone</span></dt>
+        <dd><a href="tel:+821081199532"><span lang="ko">010-8119-9532</span><span lang="en">+82 10-8119-9532</span></a></dd>
+      </dl>
     </section>
   </main>
 
