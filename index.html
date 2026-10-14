@@ -130,11 +130,38 @@ footer { padding: 32px 0 56px; border-top: 1px solid var(--line); color: var(--m
 footer p { margin: 0 0 6px; }
 footer a { color: inherit; }
 footer .copy { margin-top: 16px; font-size: 13px; }
+
+/* 첫 화면: 어두운 바탕 위에 빛으로 자라는 나무 */
+.sky {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(120% 80% at 50% 100%, #2A3522 0%, #161C13 52%, #0D110B 100%);
+  color: #E9EBDD;
+  --text: #E9EBDD; --muted: #B4B8A0; --line: #3A4333; --surface: rgba(36,43,32,.55);
+  --accent: #A9AC85; --leaf-dark: #E9EBDD; --leaf-sage: #A9AC85;
+}
+.sky canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sky .wrap { position: relative; }
+.sky .hero { padding: 9vh 0 max(48vh, 300px); text-align: center; }
+.sky .hero h1 { font-weight: 500; font-size: clamp(25px, 4.6vw, 36px); line-height: 1.6; letter-spacing: -0.01em; margin-bottom: 28px; }
+.sky .hero h1 span span { display: block; opacity: 0; animation: rise 2.4s ease forwards; }
+.sky .hero h1 span span:nth-child(2) { animation-delay: 1.4s; }
+.sky .hero h1 span span { text-wrap: balance; }
+.sky .hero p .s { display: block; text-wrap: balance; }
+.sky .hero p br { display: none; }
+@media (min-width: 640px) { .sky .hero p br { display: inline; } }
+.sky .hero p { margin: 0 auto; max-width: 620px; font-size: 16px; opacity: 0; animation: rise 2s ease 2.8s forwards; }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .sky .hero h1 span span, .sky .hero p { animation: none; opacity: 1; }
+}
+main > section:first-child { border-top: 0; }
 </style>
 </head>
 <body>
+<div class="sky">
+<canvas id="tree" aria-hidden="true"></canvas>
 <div class="wrap">
-
   <header>
     <div class="lockup">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="215 132 606 816" role="img" aria-label="FineLeaf 심볼">
@@ -146,13 +173,17 @@ footer .copy { margin-top: 16px; font-size: 13px; }
     <button type="button" class="lang-toggle" id="lang-toggle" hidden>한국어</button>
   </header>
 
-  <main>
-    <div class="hero">
-      <h1><span lang="ko">AI 에이전트로 소프트웨어 개발과 지식 작업을 자동화합니다</span><span lang="en">Automating software development and knowledge work with AI agents</span></h1>
-      <p lang="ko">FineLeaf(파인리프)는 한국의 1인 IT 회사입니다. 사람이 단계마다 확인하고 승인하는 방식으로, AI 에이전트가 실제 업무를 끝까지 처리하는 도구를 만들고 있습니다.</p>
-      <p lang="en">FineLeaf is a one-person software studio in Korea. We are building tools where AI agents carry software and knowledge work through to completion, with a human checking and approving each step.</p>
-    </div>
+  <div class="hero">
+    <h1><span lang="ko"><span>사람은 저마다 한 장의 잎입니다.</span><span>AI와 함께라면, 잎 하나가 나무 한 그루를 그립니다.</span></span><span lang="en"><span>Each person is a single leaf.</span><span>With AI, one leaf can draw a whole tree.</span></span></h1>
+    <p lang="ko"><span class="s">FineLeaf(파인리프)는 한국의 1인 IT 회사입니다.</span><span class="s">한 사람이 AI를 조율해 혼자서는 닿지 못하던 크기의&nbsp;일을 해내도록,<br> 그 방법과 도구를 만들고 있습니다.</span></p>
+    <p lang="en"><span class="s">FineLeaf is a one-person software studio in Korea.</span><span class="s">We build the methods and tools that let one person orchestrate AI<br> and take on work far larger than one person could reach alone.</span></p>
+  </div>
+</div>
+</div>
 
+<div class="wrap">
+
+  <main>
     <section>
       <h2>Products</h2>
       <ul class="products">
@@ -293,6 +324,89 @@ footer .copy { margin-top: 16px; font-size: 13px; }
     set(next);
     try { localStorage.setItem('lang', next); } catch (e) {}
   });
+})();
+</script>
+<script>
+(function () {
+  var c = document.getElementById('tree'); if (!c || !c.getContext) return;
+  var g = c.getContext('2d');
+  var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var seed = 11; function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+  // 가지는 부모 뒤에 자식이 오는 순서로 쌓는다. 각 가지는 밑동을 축으로 조금씩 휘고, 휜 만큼이 그 위 가지로 이어진다
+  var nodes = [], motes = [], MAXD = 9, GROW = 4.2;
+  function grow(par, x0, y0, ang, len, d, t0) {
+    var n = { par: par, ang: ang, len: len, d: d, t0: t0, t1: t0 + len * GROW, rx: x0 + Math.cos(ang) * len, ry: y0 + Math.sin(ang) * len,
+              flex: Math.pow(d / MAXD, 1.6), ph: (nodes.length * 2.399) % 6.28, b: 0, bv: 0, ca: 0, x: 0, y: 0, leaf: null };
+    nodes.push(n);
+    if (d >= MAXD) { n.leaf = { p: rnd() * 6.28, r: 0.7 + rnd() * 1.1, w: rnd() < 0.18 }; return; }
+    var k = rnd() < 0.34 ? 3 : 2, spread = 0.62 + rnd() * 0.3, base = ang + (-Math.PI / 2 - ang) * 0.22;
+    for (var i = 0; i < k; i++) grow(n, n.rx, n.ry, base + (i / (k - 1) - 0.5) * spread * (k === 3 ? 1.35 : 1) + (rnd() - 0.5) * 0.28, len * (0.68 + rnd() * 0.14), d + 1, n.t1);
+  }
+  grow(null, 0, 0, -Math.PI / 2, 0.25, 0, 0.3);
+  for (var i = 0; i < 46; i++) motes.push({ x: (rnd() - 0.5) * 2.2, y: -rnd() * 1.1, v: 0.012 + rnd() * 0.02, p: rnd() * 6.28, r: 0.5 + rnd() });
+
+  var W, H, S, dpr, t0 = 0;
+  // 커서는 잎을 직접 밀지 않고 바람을 일으킨다. 바람은 천천히 일어나 천천히 잦아든다
+  var tx = 0, ty = -9999, cx = 0, cy = -9999, lx = null, ly = 0, gx = 0, gy = 0, REACH = 240;
+  var sky = c.parentNode;
+  sky.addEventListener('pointermove', function (e) {
+    var r = c.getBoundingClientRect(), nx = e.clientX - r.left - W / 2, ny = e.clientY - r.top - H - 2;
+    if (lx !== null) { gx += Math.max(-30, Math.min(30, nx - lx)) * 0.02; gy += Math.max(-30, Math.min(30, ny - ly)) * 0.02; }
+    lx = nx; ly = ny; tx = nx; ty = ny;
+    if (cy < -9000) { cx = nx; cy = ny; }
+  });
+  sky.addEventListener('pointerleave', function () { lx = null; });
+
+  function size() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = c.clientWidth; H = c.clientHeight; c.width = W * dpr; c.height = H * dpr;
+    var ps = document.querySelectorAll('.sky .hero p'), bottom = 0, r0 = c.getBoundingClientRect();
+    for (var k = 0; k < ps.length; k++) bottom = Math.max(bottom, ps[k].getBoundingClientRect().bottom - r0.top);
+    S = Math.max(160, Math.min((H - bottom - 36) / 1.03, W * 0.95));
+  }
+  function draw(now) {
+    if (!t0) t0 = now;
+    var t = still ? 1e9 : (now - t0) / 1000, i, n, f, a, dx, dy, k, wx, wy, x0, y0;
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    g.translate(W / 2, H + 2); g.lineCap = 'round';
+    cx += (tx - cx) * 0.06; cy += (ty - cy) * 0.06; gx *= 0.985; gy *= 0.985;
+    for (i = 0; i < nodes.length; i++) {
+      n = nodes[i]; if (t <= n.t0) continue;
+      if (!still) {
+        dx = n.rx * S - cx; dy = n.ry * S - cy; k = Math.exp(-(dx * dx + dy * dy) / (REACH * REACH));
+        wx = gx * k + 1.5 * Math.sin(t * 0.55 + n.rx * 2.4 + n.ph * 0.15); wy = gy * k * 0.6;
+        a = n.ang + (n.par ? n.par.ca : 0);
+        n.bv = (n.bv + (n.flex * 0.007 * (-wx * Math.sin(a) + wy * Math.cos(a)) - n.b) * 0.02) * 0.93;
+        n.b += n.bv;
+      }
+      n.ca = (n.par ? n.par.ca : 0) + n.b;
+      f = Math.min(1, (t - n.t0) / (n.t1 - n.t0));
+      x0 = n.par ? n.par.x : 0; y0 = n.par ? n.par.y : 0; a = n.ang + n.ca;
+      n.x = x0 + Math.cos(a) * n.len * S * f; n.y = y0 + Math.sin(a) * n.len * S * f;
+      g.beginPath(); g.moveTo(x0, y0); g.lineTo(n.x, n.y);
+      g.lineWidth = Math.max(0.5, (MAXD - n.d) * 0.42);
+      g.strokeStyle = 'rgba(178,184,140,' + (0.16 + (MAXD - n.d) * 0.035) + ')';
+      g.stroke();
+    }
+    for (i = 0; i < nodes.length; i++) {
+      n = nodes[i]; if (!n.leaf || t <= n.t1) continue;
+      f = Math.min(1, (t - n.t1) / 1.5) * (0.45 + 0.4 * Math.sin(t * 0.7 + n.leaf.p));
+      if (f <= 0.02) continue;
+      var col = n.leaf.w ? '247,236,196,' : '201,210,160,';
+      g.fillStyle = 'rgba(' + col + (f * 0.12) + ')'; g.beginPath(); g.arc(n.x, n.y, n.leaf.r * 4.5, 0, 6.29); g.fill();
+      g.fillStyle = 'rgba(' + col + (f * 0.9) + ')'; g.beginPath(); g.arc(n.x, n.y, n.leaf.r, 0, 6.29); g.fill();
+    }
+    for (i = 0; i < motes.length; i++) {
+      n = motes[i];
+      var y = still ? n.y : -(((-n.y) + t * n.v) % 1.15), x = n.x + Math.sin(t * 0.25 + n.p) * 0.03;
+      g.fillStyle = 'rgba(233,235,221,' + (0.10 + 0.10 * Math.sin(t * 0.9 + n.p)) + ')';
+      g.beginPath(); g.arc(x * S, y * S, n.r, 0, 6.29); g.fill();
+    }
+    if (!still) requestAnimationFrame(draw);
+  }
+  size(); window.addEventListener('resize', function () { size(); if (still) draw(0); });
+  var tg = document.getElementById('lang-toggle'); if (tg) tg.addEventListener('click', function () { setTimeout(function () { size(); if (still) draw(0); }, 0); });
+  requestAnimationFrame(draw);
 })();
 </script>
 </body>
