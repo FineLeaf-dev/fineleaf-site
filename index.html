@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en" data-lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FineLeaf — AI 에이전트로 소프트웨어와 지식 작업을 자동화합니다</title>
-<meta name="description" content="FineLeaf(파인리프)는 AI 에이전트로 소프트웨어 개발과 지식 작업을 자동화하는 도구를 만드는 1인 IT 회사입니다.">
+<title>FineLeaf — Automating software and knowledge work with AI agents</title>
+<meta name="description" content="FineLeaf is a one-person software studio in Korea, building tools where AI agents automate software development and knowledge work with a human approving each step.">
 <link rel="icon" href="favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,7 +48,19 @@ body {
 }
 .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
 
-header { padding: 56px 0 8px; }
+header { padding: 56px 0 8px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+html[data-lang="en"] [lang="ko"], html[data-lang="ko"] [lang="en"] { display: none; }
+.lang-toggle {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 14px;
+  cursor: pointer;
+}
 .lockup { display: flex; align-items: center; gap: 14px; }
 .lockup svg { width: 40px; height: 54px; flex: none; }
 .wordmark {
@@ -78,7 +90,6 @@ header { padding: 56px 0 8px; }
   text-wrap: balance;
 }
 .hero p { margin: 0 0 12px; color: var(--muted); max-width: 60ch; }
-.hero p.en { font-size: 15px; }
 
 section { padding: 40px 0; border-top: 1px solid var(--line); }
 h2 {
@@ -104,9 +115,6 @@ h2 {
 
 .prose p { margin: 0 0 14px; color: var(--muted); max-width: 62ch; }
 .prose p:last-child { margin-bottom: 0; }
-.prose ul { margin: 0; padding-left: 20px; color: var(--muted); max-width: 62ch; }
-.prose li { margin-bottom: 8px; }
-.prose li strong { color: var(--text); }
 
 .contact a {
   color: var(--text);
@@ -135,90 +143,157 @@ footer .copy { margin-top: 16px; font-size: 13px; }
       </svg>
       <div class="wordmark">FineLeaf<small>파인리프</small></div>
     </div>
+    <button type="button" class="lang-toggle" id="lang-toggle" hidden>한국어</button>
   </header>
 
   <main>
     <div class="hero">
-      <h1>AI 에이전트로 소프트웨어 개발과 지식 작업을 자동화합니다</h1>
-      <p>FineLeaf(파인리프)는 한국의 1인 IT 회사입니다. 사람이 단계마다 확인하고 승인하는 방식으로, AI 에이전트가 실제 업무를 끝까지 처리하는 도구를 만들고 있습니다.</p>
-      <p class="en" lang="en">FineLeaf is a one-person software studio in Korea. We build tools where AI agents carry software and knowledge work through to completion, with a human approving each step.</p>
+      <h1><span lang="ko">AI 에이전트로 소프트웨어 개발과 지식 작업을 자동화합니다</span><span lang="en">Automating software development and knowledge work with AI agents</span></h1>
+      <p lang="ko">FineLeaf(파인리프)는 한국의 1인 IT 회사입니다. 사람이 단계마다 확인하고 승인하는 방식으로, AI 에이전트가 실제 업무를 끝까지 처리하는 도구를 만들고 있습니다.</p>
+      <p lang="en">FineLeaf is a one-person software studio in Korea. We are building tools where AI agents carry software and knowledge work through to completion, with a human checking and approving each step.</p>
     </div>
-
-    <section class="prose" lang="en">
-      <h2>In English</h2>
-      <p>FineLeaf was founded in 2022 and is run by one backend developer with 11 years of experience building enterprise systems in Java and Spring. It is bootstrapped, with no outside investment.</p>
-      <p>Every product is developed with AI coding agents. A person reviews and approves each step before the next one starts.</p>
-      <ul>
-        <li><strong>LeafFire</strong> (released): a FIRE (early retirement) planner mini-app inside the Toss app in Korea. It estimates retirement timing and required assets from tax-advantaged accounts and dividends.</li>
-        <li><strong>Leafroot</strong> (in internal use): a knowledge system that turns articles, videos and notes into linked single-claim notes, which agents use as reference material.</li>
-        <li><strong>Leafier</strong> (in development): turns a natural-language request into documents, then a project scaffold, then features, with human review at each step.</li>
-        <li><strong>Leafroom</strong> (in development): a room where a person and several AI models share a whiteboard and a chat. The AI proposes board edits, and only accepted edits are applied.</li>
-        <li><strong>Leafstem</strong> (planned): a way for one person to run a project from documents to delivery, connecting the three products above.</li>
-      </ul>
-    </section>
 
     <section>
       <h2>Products</h2>
       <ul class="products">
         <li>
-          <p class="meta">한국형 FIRE 플래너 미니앱 · 출시</p>
-          <h3>LeafFire</h3>
-          <p class="tagline">FIRE(조기 은퇴)를 준비하는 잎입니다.</p>
-          <p>절세 계좌와 배당을 기준으로 은퇴 시점과 필요한 자산을 계산해 주는 재테크 계산 도구입니다. 토스 앱 안의 미니앱으로 출시했습니다.</p>
+          <div lang="ko">
+            <p class="meta">한국형 FIRE 플래너 미니앱 · 출시</p>
+            <h3>LeafFire</h3>
+            <p class="tagline">FIRE(조기 은퇴)를 준비하는 잎입니다.</p>
+            <p>절세 계좌와 배당을 기준으로 은퇴 시점과 필요한 자산을 계산해 주는 재테크 계산 도구입니다. 토스 앱 안의 미니앱으로 출시했습니다.</p>
+          </div>
+          <div lang="en">
+            <p class="meta">FIRE planner mini-app for Korea · Released</p>
+            <h3>LeafFire</h3>
+            <p class="tagline">A leaf for preparing FIRE (early retirement).</p>
+            <p>A calculator that estimates retirement timing and required assets from tax-advantaged accounts and dividends. Released as a mini-app inside the Toss app.</p>
+          </div>
         </li>
         <li>
-          <p class="meta">지식 관리 시스템 · 내부 운영 중</p>
-          <h3>Leafroot</h3>
-          <p class="tagline">뿌리. 일의 바탕이 되는 지식입니다.</p>
-          <p>글과 영상, 메모를 한 가지 주장만 담은 노트로 정리하고 노트끼리 연결합니다. 쌓인 지식은 에이전트가 일할 때 참고 자료로 쓰입니다.</p>
+          <div lang="ko">
+            <p class="meta">지식 관리 시스템 · 내부 운영 중</p>
+            <h3>Leafroot</h3>
+            <p class="tagline">뿌리. 일의 바탕이 되는 지식입니다.</p>
+            <p>글과 영상, 메모를 한 가지 주장만 담은 노트로 정리하고 노트끼리 연결합니다. 쌓인 지식은 에이전트가 일할 때 참고 자료로 쓰입니다.</p>
+          </div>
+          <div lang="en">
+            <p class="meta">Knowledge management system · In internal use</p>
+            <h3>Leafroot</h3>
+            <p class="tagline">Root. The knowledge that work grows from.</p>
+            <p>Turns articles, videos and memos into notes that each hold a single claim, and links the notes to each other. Agents use the accumulated knowledge as reference material when they work.</p>
+          </div>
         </li>
         <li>
-          <p class="meta">여러 AI와 함께 쓰는 회의실 · 개발 중</p>
-          <h3>Leafroom</h3>
-          <p class="tagline">방. 사람과 AI가 모여 생각을 정합니다.</p>
-          <p>사람과 여러 AI가 화이트보드와 대화방을 같이 씁니다. AI는 말로만 답하지 않고 보드 수정안을 올리며, 사람이 수락한 것만 반영됩니다.</p>
+          <div lang="ko">
+            <p class="meta">여러 AI와 함께 쓰는 회의실 · 개발 중</p>
+            <h3>Leafroom</h3>
+            <p class="tagline">방. 사람과 AI가 모여 생각을 정합니다.</p>
+            <p>사람과 여러 AI가 화이트보드와 대화방을 같이 씁니다. AI는 말로만 답하지 않고 보드 수정안을 올리며, 사람이 수락한 것만 반영됩니다.</p>
+          </div>
+          <div lang="en">
+            <p class="meta">Meeting room shared with several AIs · In development</p>
+            <h3>Leafroom</h3>
+            <p class="tagline">Room. Where people and AI gather to settle ideas.</p>
+            <p>A person and several AI models share a whiteboard and a chat. The AI does more than answer in words: it proposes edits to the board, and only the edits a person accepts are applied.</p>
+          </div>
         </li>
         <li>
-          <p class="meta">소프트웨어 제작 서비스 · 개발 중</p>
-          <h3>Leafier</h3>
-          <p class="tagline">잎이 더 무성하게. 정한 것을 실제 소프트웨어로 키웁니다.</p>
-          <p>자연어로 요청하면 문서로 정리하고, 그 문서에서 프로젝트 뼈대를 만들고, 기능을 하나씩 구현합니다. 각 단계의 결과는 사람이 검토한 뒤에 다음 단계로 넘어갑니다.</p>
+          <div lang="ko">
+            <p class="meta">소프트웨어 제작 서비스 · 개발 중</p>
+            <h3>Leafier</h3>
+            <p class="tagline">잎이 더 무성하게. 정한 것을 실제 소프트웨어로 키웁니다.</p>
+            <p>자연어로 요청하면 문서로 정리하고, 그 문서에서 프로젝트 뼈대를 만들고, 기능을 하나씩 구현합니다. 각 단계의 결과는 사람이 검토한 뒤에 다음 단계로 넘어갑니다.</p>
+          </div>
+          <div lang="en">
+            <p class="meta">Software building service · In development</p>
+            <h3>Leafier</h3>
+            <p class="tagline">Leafier. Grows what was decided into real software.</p>
+            <p>Turns a natural-language request into documents, builds a project scaffold from those documents, and implements features one at a time. A person reviews the result of each step before the next step begins.</p>
+          </div>
         </li>
         <li>
-          <p class="meta">1인 프로젝트 수행 체계 · 구상 중</p>
-          <h3>Leafstem</h3>
-          <p class="tagline">줄기. 뿌리에서 잎까지 잇습니다.</p>
-          <p>문서에서 납품까지를 한 사람이 통솔하는 체계입니다. 소스 코드의 지도를 가운데 두고, 지점마다 사람이 할지 AI가 할지를 정해 가며 진행합니다. Leafroot, Leafroom, Leafier를 하나로 이을 계획입니다.</p>
+          <div lang="ko">
+            <p class="meta">1인 프로젝트 수행 체계 · 구상 중</p>
+            <h3>Leafstem</h3>
+            <p class="tagline">줄기. 뿌리에서 잎까지 잇습니다.</p>
+            <p>문서에서 납품까지를 한 사람이 통솔하는 체계입니다. 소스 코드의 지도를 가운데 두고, 지점마다 사람이 할지 AI가 할지를 정해 가며 진행합니다. Leafroot, Leafroom, Leafier를 하나로 이을 계획입니다.</p>
+          </div>
+          <div lang="en">
+            <p class="meta">One-person project delivery system · Planned</p>
+            <h3>Leafstem</h3>
+            <p class="tagline">Stem. Connects the root to the leaves.</p>
+            <p>A system for one person to lead a project from documents to delivery. It keeps a map of the source code at the center and decides, point by point, whether a person or an AI does the work. It is planned to connect Leafroot, Leafroom and Leafier.</p>
+          </div>
         </li>
       </ul>
     </section>
 
     <section class="prose">
       <h2>About</h2>
-      <p>FineLeaf는 2022년에 설립했습니다. 11년간 Java·Spring 기반 기업 시스템을 구축하고 운영해 온 백엔드 개발자 홍기용이 혼자 운영합니다.</p>
-      <p>외부 투자를 받지 않고 자기 자본으로 운영합니다.</p>
+      <div lang="ko">
+        <p>FineLeaf는 2022년에 설립했습니다. 11년간 Java·Spring 기반 기업 시스템을 구축하고 운영해 온 백엔드 개발자 홍기용이 혼자 운영합니다.</p>
+        <p>외부 투자를 받지 않고 자기 자본으로 운영합니다.</p>
+      </div>
+      <div lang="en">
+        <p>FineLeaf was founded in 2022. It is run solely by Hong Kiyong, a backend developer who has built and operated enterprise systems in Java and Spring for 11 years.</p>
+        <p>It is bootstrapped, with no outside investment.</p>
+      </div>
     </section>
 
     <section class="prose">
       <h2>How we build</h2>
-      <p>FineLeaf의 제품은 AI를 이용해 개발합니다. 설계와 구현, 검토를 AI 에이전트와 함께 진행하고, 결정과 승인은 사람이 맡습니다.</p>
-      <p>에이전트가 만든 결과물은 제안으로 다룹니다. 사람이 확인하기 전에는 다음 단계로 넘어가지 않는다는 원칙을 제품에도 그대로 넣었습니다.</p>
+      <div lang="ko">
+        <p>FineLeaf의 제품은 AI를 이용해 개발합니다. 설계와 구현, 검토를 AI 에이전트와 함께 진행하고, 결정과 승인은 사람이 맡습니다.</p>
+        <p>에이전트가 만든 결과물은 제안으로 다룹니다. 사람이 확인하기 전에는 다음 단계로 넘어가지 않는다는 원칙을 제품에도 그대로 넣었습니다.</p>
+      </div>
+      <div lang="en">
+        <p>FineLeaf's products are developed using AI. Design, implementation and review are done together with AI agents, while decisions and approvals stay with a person.</p>
+        <p>What an agent produces is treated as a proposal. Nothing moves to the next step until a person has checked it, and the same principle is built into the products.</p>
+      </div>
     </section>
 
     <section class="contact">
       <h2>Contact</h2>
       <a href="mailto:crowggang@fineleaf.co.kr">crowggang@fineleaf.co.kr</a><br>
-      <a href="tel:010-8119-9532">010-8119-9532</a>
-      <p>홍기용</p>
+      <a href="tel:+821081199532"><span lang="ko">010-8119-9532</span><span lang="en">+82 10-8119-9532</span></a>
+      <p lang="ko">홍기용</p>
+      <p lang="en">Hong Kiyong</p>
     </section>
   </main>
 
   <footer>
-    <p>FineLeaf(파인리프) · 홍기용 · 2022년 설립 (Founded in 2022)</p>
-    <p>이메일 <a href="mailto:crowggang@fineleaf.co.kr">crowggang@fineleaf.co.kr</a> · 전화 <a href="tel:010-8119-9532">010-8119-9532</a></p>
+    <p lang="ko">FineLeaf(파인리프) · 홍기용 · 2022년 설립</p>
+    <p lang="en">FineLeaf · Hong Kiyong · Founded in 2022</p>
+    <p><span lang="ko">이메일</span><span lang="en">Email</span> <a href="mailto:crowggang@fineleaf.co.kr">crowggang@fineleaf.co.kr</a> · <span lang="ko">전화</span><span lang="en">Phone</span> <a href="tel:+821081199532"><span lang="ko">010-8119-9532</span><span lang="en">+82 10-8119-9532</span></a></p>
     <p class="copy">© 2022–2026 FineLeaf. All rights reserved.</p>
   </footer>
 
 </div>
+<script>
+(function () {
+  var root = document.documentElement;
+  var btn = document.getElementById('lang-toggle');
+  var titles = {
+    ko: 'FineLeaf — AI 에이전트로 소프트웨어와 지식 작업을 자동화합니다',
+    en: 'FineLeaf — Automating software and knowledge work with AI agents'
+  };
+  function set(lang) {
+    root.setAttribute('data-lang', lang);
+    root.lang = lang;
+    document.title = titles[lang];
+    btn.textContent = lang === 'ko' ? 'English' : '한국어';
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  set(saved === 'ko' ? 'ko' : 'en');
+  btn.hidden = false;
+  btn.addEventListener('click', function () {
+    var next = root.getAttribute('data-lang') === 'ko' ? 'en' : 'ko';
+    set(next);
+    try { localStorage.setItem('lang', next); } catch (e) {}
+  });
+})();
+</script>
 </body>
 </html>
